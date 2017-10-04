@@ -149,6 +149,8 @@ class SourceMapDecoder(object):
     def _decode_map(self, smap):
         sources = smap['sources']
         sourceRoot = smap.get('sourceRoot')
+        sourcesContent = smap.get('sourcesContent')
+        print(sourcesContent)
         names = list(map(text_type, smap['names']))
         mappings = smap['mappings']
         lines = mappings.split(';')
@@ -229,7 +231,7 @@ class SourceMapDecoder(object):
                 # Insert into specific line index
                 line_index[dst_line].append(dst_col)
 
-        return SourceMapIndex(smap, tokens, line_index, index, sources)
+        return SourceMapIndex(smap, tokens, line_index, index, sources, sourcesContent)
 
 
 # Mapping of base64 letter -> integer value.
